@@ -1,0 +1,27 @@
+{
+  "name": "dorm_manual_add_transactionrecord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cytle/jquery.cliptable.git"
+  },
+  "keywords": [
+    "jquery",
+    "cliptable",
+    "Excel"
+  ],
+  "author": "xsp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cytle/jquery.cliptable/issues"
+  },
+  "homepage": "https://github.com/cytle/jquery.cliptable#readme",
+  "dependencies": {
+    "jquery": "2.*"
+  }
+}
