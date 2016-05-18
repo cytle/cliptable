@@ -11,7 +11,7 @@ cliptable(table[, options]);
 ### OPTIONS
 
 |属性|备注|
-|--|--|
+|---|---|
 |inputSelector|input筛选,string(在设置数据时使用,默认为：'input')|
 |trSelector|tr筛选,string|
 |tdSelector|td筛选,string|
