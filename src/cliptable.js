@@ -44,56 +44,53 @@ cliptable.prototype = {
   rowSign: 'row',
   colSign: 'col',
 
-  isInput: function (el) {
-    return el.nodeName === 'INPUT';
-  },
-
-
+  // 绑定监听
   _bindEvents: function () {
 
     var self = this;
 
-    var showPaste = document.getElementById('showPaste');
-
-    self
+    this
     .table
       .addEventListener('paste', function (e) {
 
-        var values;
-
-        if (e && e.clipboardData && e.clipboardData.getData) {
-
-          if (/text\/html/.test(e.clipboardData.types)) {
-            values = e.clipboardData.getData('text/html');
-
-            values = self.htmlTableToArr(values, self.options);
-
-          }
-          else if (/text\/plain/.test(e.clipboardData.types)) {
-            values = e.clipboardData.getData('text/plain');
-
-            values = self.textToArr(values, self.options);
-
-          }
-          else {
-            values = [];
-          }
-
-          if (e.preventDefault) {
-            e.stopPropagation();
-            e.preventDefault();
-          }
-
-        }
-
-
+        var values = self.getArrFromClipboardData(clipboardData);
         if (values && values.length > 0) {
-
           self.pasteValue(self.table, values, self.options);
         }
 
+        if (e.preventDefault) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
       }, false);
 
+  },
+
+  // 从clipboardData 获取数据
+  getArrFromClipboardData: function (clipboardData) {
+    var values ;
+
+    if (clipboardData && clipboardData.getData) {
+
+
+      if (/text\/html/.test(clipboardData.types)) {
+        values = clipboardData.getData('text/html');
+
+        values = this.htmlTableToArr(values, this.options);
+
+      }
+      else if (/text\/plain/.test(clipboardData.types)) {
+        values = clipboardData.getData('text/plain');
+
+        values = this.textToArr(values, this.options);
+
+      }
+      else {
+        values = [];
+      }
+
+    }
+    return values;
   },
 
   htmlTableToArr: function (table) {
@@ -112,7 +109,7 @@ cliptable.prototype = {
 
       rowValues = [];
 
-      for (var j = tds.length - 1; j >= 0; j--) {
+      for (var j = 0, m = tds.length; j < m; j++) {
         rowValues.push(tds[j].innerHTML);
       }
 
