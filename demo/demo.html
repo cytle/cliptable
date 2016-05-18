@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>demo</title>
+
+</head>
+<body>
+  <table >
+    <thead>
+      <tr>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td  data-row=1 class="tdInput"><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="../src/cliptable.js"></script>
+
+  <script>
+
+    window.onload = function () {
+      var table = document.querySelector('table');
+
+      cliptable(table, {
+        trOverflowCallback: function (data, options) {
+
+          var tr = document.createElement("tr");
+
+          for (var i = 0; i < 4; i++) {
+            var td = document.createElement("td");
+            var input = document.createElement("input");
+            td.appendChild(input);
+            tr.appendChild(td);
+
+          }
+
+          data.tBody.appendChild(tr);
+
+          return true;
+        },
+
+        tdOverflowCallback: function (data, options) {
+
+
+          var td = document.createElement("td");
+          var input = document.createElement("input");
+          td.appendChild(input);
+
+          data.tr.appendChild(td);
+
+          return true;
+        }
+      });
+    };
+
+  </script>
+</body>
+</html>
