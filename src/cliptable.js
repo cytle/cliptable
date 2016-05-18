@@ -53,9 +53,30 @@ cliptable.prototype = {
     .table
       .addEventListener('paste', function (e) {
 
-        var values = self.getArrFromClipboardData(clipboardData);
+        var values = self.getArrFromClipboardData(e.clipboardData);
         if (values && values.length > 0) {
+          var td = e.target.closest('table tr td'),
+              startRowN,
+              startColN;
+
+          if (td) {
+
+            startRowN = td.dataset[self.rowSign];
+            startColN = td.dataset[self.colSign];
+
+            if (startRowN && startColN) {
+              self.options.startRowN = parseInt(startRowN);
+              self.options.startColN = parseInt(startColN);
+            } else {
+              self.options.startRowN = 0;
+              self.options.startColN = 0;
+            }
+
+
+          }
+
           self.pasteValue(self.table, values, self.options);
+
         }
 
         if (e.preventDefault) {
