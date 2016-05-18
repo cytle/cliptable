@@ -1,8 +1,8 @@
 {
-  "name": "jquery.cliptable",
+  "name": "cliptable",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "excel数据copy到table中",
+  "main": "src/cliptable.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,8 +20,6 @@
   "bugs": {
     "url": "https://github.com/cytle/jquery.cliptable/issues"
   },
-  "homepage": "https://github.com/cytle/jquery.cliptable#readme",
-  "dependencies": {
-    "jquery": "2.*"
-  }
+  "homepage": "https://github.com/cytle/jquery.cliptable#readme"
+
 }
