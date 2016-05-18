@@ -1,27 +1,25 @@
 {
-  "name": "jquery.cliptable",
+  "name": "cliptable",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Excel数据copy到table中",
+  "main": "src/cliptable.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/cytle/jquery.cliptable.git"
+    "url": "git+ssh://git@github.com/cytle/cliptable.git"
   },
   "keywords": [
-    "jquery",
     "cliptable",
+    "paste",
     "Excel"
   ],
   "author": "xsp",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cytle/jquery.cliptable/issues"
+    "url": "https://github.com/cytle/cliptable/issues"
   },
-  "homepage": "https://github.com/cytle/jquery.cliptable#readme",
-  "dependencies": {
-    "jquery": "2.*"
-  }
+  "homepage": "https://github.com/cytle/cliptable#readme"
+
 }

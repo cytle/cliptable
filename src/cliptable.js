@@ -173,7 +173,6 @@ cliptable.prototype = {
 
     var rowSign = options.rowSign || this.rowSign || 'row',
         colSign = options.colSign || this.colSign || 'col',
-        inputSelector = options.inputSelector || 'input',
         trSelector = options.trSelector || ':scope > tr',
         tdSelector = options.tdSelector || ':scope > td',
         trs, tds, rowN, colN;
