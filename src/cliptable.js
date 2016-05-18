@@ -10,8 +10,6 @@ function cliptable (table, options) {
   var self = this;
 
   this.table = table;
-  this.textarea = this.createTextarea();
-  this.popover = this.createPopover();
 
   if (options.trOverflowCallback) {
     var trOverflowCallback = options.trOverflowCallback;
@@ -54,15 +52,6 @@ cliptable.prototype = {
   _bindEvents: function () {
 
     var self = this;
-    self.popover.on('shown', function () {
-      // self.textarea.value = '';
-    });
-
-    window.addEventListener('click', function (e) {
-      if (! e.isFromPopover && ! e.isFromCliptable) {
-        self.popover.el.style.display = 'none';
-      }
-    }, false);
 
     var showPaste = document.getElementById('showPaste');
 
@@ -105,22 +94,6 @@ cliptable.prototype = {
 
       }, false);
 
-
-    self.textarea.addEventListener('change', function (event) {
-
-      var text = event.target.value.trim();
-      if (text) {
-        var values = self.textToArr(text, self.options);
-
-        if (values.length > 0) {
-          self.pasteValue(self.table, values, self.options);
-        }
-
-      }
-
-    }, false);
-
-
   },
 
   htmlTableToArr: function (table) {
@@ -148,24 +121,6 @@ cliptable.prototype = {
     }
 
     return values;
-  },
-
-
-  createPopover: function (textarea) {
-    var popover = new Popover({});
-
-    popover.el.addEventListener('click', function (e) {
-      e.isFromPopover = true;
-    });
-
-    return popover;
-
-  },
-
-
-  createTextarea: function (textarea) {
-    return document.createElement('textarea');
-
   },
 
 
