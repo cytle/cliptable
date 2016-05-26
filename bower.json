@@ -1,0 +1,24 @@
+{
+  "name": "cliptable",
+  "description": "Excel数据copy到table中",
+  "main": "src/cliptable.js",
+  "authors": [
+    "xsp"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "cliptable",
+    "paste",
+    "Excel"
+  ],
+  "homepage": "https://github.com/cytle/cliptable",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
