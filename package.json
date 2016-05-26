@@ -1,6 +1,6 @@
 {
   "name": "cliptable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Excel数据copy到table中",
   "main": "src/cliptable.js",
   "scripts": {
