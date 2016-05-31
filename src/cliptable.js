@@ -1,7 +1,8 @@
+'use strict';
 
-function cliptable (table, options) {
+window.cliptable = function cliptable (table, options) {
 
-  if (this === window) {
+  if (!this || this === window) {
     return new cliptable(table, options);
   }
 
@@ -15,9 +16,12 @@ function cliptable (table, options) {
     var trOverflowCallback = options.trOverflowCallback;
 
     options.trOverflowCallback = function () {
+
+      var result = trOverflowCallback.apply(this, arguments);
       self.signInput(table, options);
 
-      return trOverflowCallback.apply(this, arguments);
+      return result;
+
     };
   }
 
@@ -25,9 +29,12 @@ function cliptable (table, options) {
     var tdOverflowCallback = options.tdOverflowCallback;
 
     options.tdOverflowCallback = function () {
+
+      var result = tdOverflowCallback.apply(this, arguments);
+
       self.signInput(table, options);
 
-      return tdOverflowCallback.apply(this, arguments);
+      return result;
     };
   }
 
@@ -35,14 +42,15 @@ function cliptable (table, options) {
   this.signInput(table, options);
 
   this._bindEvents();
-}
+};
 
 
 
-cliptable.prototype = {
+window.cliptable.prototype = {
 
   rowSign: 'row',
   colSign: 'col',
+  nameSign: 'name',
 
   // 绑定监听
   _bindEvents: function () {
@@ -198,6 +206,50 @@ cliptable.prototype = {
 
   },
 
+  getDatas: function (table, options) {
+    options = options || {};
+
+    var nameSign = options.nameSign || this.nameSign || 'name',
+        trSelector = options.trSelector || ':scope > tr',
+        tdSelector = options.tdSelector || ':scope > td',
+        inputSelector = options.inputSelector = options.inputSelector || 'input',
+        trs, tds, rowN, colN, datas = [], itemData, td, value;
+
+    if (! table.tBodies || table.tBodies.length === 0) {
+      return false;
+    }
+
+    trs = table.tBodies[0].querySelectorAll(trSelector);
+
+    for (rowN = trs.length - 1; rowN >= 0; rowN--) {
+
+      tds = trs[rowN].querySelectorAll(tdSelector);
+
+
+      for (colN = tds.length - 1; colN >= 0; colN--) {
+        td = tds[colN];
+
+        itemData = td.dataset;
+
+        value = td.querySelector(inputSelector).value || null;
+
+        if (! datas[rowN]) {
+          datas[rowN] = {};
+        }
+
+        if (itemData[nameSign]) {
+          datas[rowN][itemData[nameSign]] = value;
+        } else {
+          datas[rowN][colN] = value;
+        }
+
+      }
+    }
+
+    return datas;
+  },
+
+
   /**
    * 给表中数据赋值
    *
@@ -209,13 +261,15 @@ cliptable.prototype = {
   pasteValue: function (table, values, options) {
     options = options || {};
 
-    var i, j, rowValues, value, tBody, trs, tds, rowN, colN, canPasteRowNum, canPasteColNum,
+    var i, j, l, rowValues, value, tBody, trs, tds, rowL, rowN, colN, canPasteRowNum, canPasteColNum,
         startRowN = options.startRowN = options.startRowN || 0,
         startColN = options.startColN = options.startColN || 0,
         inputSelector = options.inputSelector = options.inputSelector || 'input',
         trSelector = options.trSelector = options.trSelector || ':scope > tr',
         tdSelector = options.tdSelector = options.tdSelector || ':scope > td',
-        trOverflowCallback = options.trOverflowCallback = options.trOverflowCallback || null; // 行溢出，数据数大于行数情况下执行
+        trOverflowCallbackResult,
+        tdOverflowCallbackResult,
+        trOverflowCallback = options.trOverflowCallback = options.trOverflowCallback || null, // 行溢出，数据数大于行数情况下执行
         tdOverflowCallback = options.tdOverflowCallback = options.tdOverflowCallback || null; // 列溢出，数据数大于列数情况下执行
 
     if (! table.tBodies || table.tBodies.length === 0) {

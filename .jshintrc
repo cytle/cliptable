@@ -1,0 +1,30 @@
+{
+  /* "nonbsp": true, */
+  "curly": true,          // 方法体必须使用大括号
+  "strict": true,         // 必须使用严格模式
+  // "camelcase": true,      // 驼峰命名，并不会识别单词，能鉴别 Ad_a,AA_a
+  "undef": true,          // 没被定义
+  "unused": true,         // 未被使用的变量
+  "shadow": "outer",      // 检查变量是否被反复定义(内外部)
+  "eqeqeq": true,         // 使用 === 替代 ==
+  "maxlen": 100,          // 每行最长 100 字符
+  "funcscope": true,      // 允许使用或赋值外部变量
+
+
+  "browser": true,
+  "jquery": true,
+  "globals": {
+    "jQuery": true,
+    "DOWN": true,
+    "_": true,
+    "$": true,
+    "define": true,
+    "require": true,
+    "setTimeout": true,
+    "clearTimeout": true,
+    "console": true,
+
+    "alert": true
+
+  }
+}
