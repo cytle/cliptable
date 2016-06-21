@@ -213,7 +213,7 @@ window.cliptable.prototype = {
         trSelector = options.trSelector || ':scope > tr',
         tdSelector = options.tdSelector || ':scope > td',
         inputSelector = options.inputSelector = options.inputSelector || 'input',
-        trs, tds, rowN, colN, datas = [], itemData, td, value;
+        trs, tds, rowN, colN, datas = [], itemData, td, input, value;
 
     if (! table.tBodies || table.tBodies.length === 0) {
       return false;
@@ -231,7 +231,14 @@ window.cliptable.prototype = {
 
         itemData = td.dataset;
 
-        value = td.querySelector(inputSelector).value || null;
+        input = td.querySelector(inputSelector);
+
+        if (! input) {
+          value = null;
+        } else {
+          value = td.querySelector(inputSelector).value || null;
+        }
+
 
         if (! datas[rowN]) {
           datas[rowN] = {};
